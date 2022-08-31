@@ -1,7 +1,45 @@
 import React from 'react'
+import Typed from 'react-typed'
+import { Footer, Navbar} from "../../components/index"
 
 export default function Landing() {
   return (
-    <div>Landing</div>
+    <>
+    <Navbar/>
+    <Hero/>
+    <Footer/>
+    </>
   )
 }
+
+
+const Hero = () => {
+  return (
+    <div>
+      <div className='max-w-[800px] mt-[-96px] w-full h-screen mx-auto text-center flex flex-col justify-center'>
+        <h1 className='md:text-7xl sm:text-6xl text-4xl font-bold md:py-6 text-transparent bg-clip-text bg-gradient-to-r to-[#3626A7] from-[#1F255B]'>
+          Write, Read, and Share Poems!
+        </h1>
+        <div className='flex justify-center items-center'>
+          <p className='text-[#3626A7] md:text-5xl sm:text-4xl text-xl font-bold py-4'>
+          Share your favorite 💌
+          </p>
+          <Typed
+          className='text-[#8375e7] md:text-5xl sm:text-4xl text-xl font-bold md:pl-4 pl-2'
+            strings={['Haikus', 'Sonnets', 'Elegies', 'Ballads', 'Free Verses']}
+            typeSpeed={120}
+            backSpeed={90}
+            loop
+          />
+        </div>
+        <p className='text-[#3626A7] md:text-2xl text-xl font-bold'>Interested in poetry? Want to read poems? Thinking of writing poems?</p>
+        <ul className='md:flex justify-center'>
+        <li className='p-1'>  <button className='bg-[#180F70] w-[200px] rounded-md font-medium my-6 mx-auto py-3 text-[#EAE8FF] btn btn-primary'>Start Reading</button></li>
+        <li className='p-1'>  <button className='bg-[#180F70] w-[200px] rounded-md font-medium my-6 mx-auto py-3 text-[#EAE8FF] btn btn-primary'>Start Writing</button></li>
+      </ul>
+
+      </div>
+    </div>
+  );
+};
+

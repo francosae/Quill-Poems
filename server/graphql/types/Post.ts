@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { nonNull, objectType, stringArg, extendType, arg } from 'nexus';
 
 export const Post = objectType({
