@@ -1,16 +1,14 @@
+
 import { PrismaClient } from "@prisma/client";
 import { posts } from '../data/posts'
+import { users } from "../data/users";
 
 const prisma = new PrismaClient()
 
 async function main(){
-    await prisma.user.create({
-        data: {
-            name: "Paul",
-            email: "paulfranco.e@gmail.com",
-            isAdmin: true,
-        }
-    })
+    // await prisma.user.createMany({
+    //     data: users
+    // })
 
     await prisma.post.createMany({
         data: posts,

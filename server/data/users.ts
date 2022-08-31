@@ -1,16 +1,24 @@
 export const users = [
     {
-        id: "d51ec774-3fde-4edc-abba-26c2571ef560",
         name: "Paul",
-        email: "paulfranco.e@gmail.com",
-        isAdmin: true,
+        email: "paul@gmail.com",
+        username: "francoooo",
+        password: "paulpass",
+        isAdmin: false,
     },
     {
-        id: "f258abdd-9ce9-4a36-96af-1a3d73c173b9",
-        name: "Franco",
-        email: "franco.e@gmail.com",
+        name: "John",
+        email: "john@gmail.com",
+        username: "oooofranco",
+        password: "johnpass",
+        isAdmin: false,
+    },
+    {
+        name: "Jerry",
+        email: "jerry@gmail.com",
+        username: "oofraooon",
+        password: "jerrypass",
         isAdmin: false,
     }
-
 ]
 

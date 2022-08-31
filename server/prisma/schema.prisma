@@ -12,17 +12,31 @@ datasource db {
 
 model User {
   id           String  @id @default(uuid())
+  username     String  @unique
   name         String
-  email        String
+  email        String  @unique
+  password     String
   isAdmin      Boolean
   writtenPosts Post[]  @relation("writtenPosts")
+
+  @@unique([id, username])
 }
 
 model Post {
-  id        String   @id @default(uuid())
-  rating    Float
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  author    User     @relation("writtenPosts", fields: [authorId], references: [id])
-  authorId  String
+  id             String   @id @default(uuid())
+  rating         Float
+  likes          Int      @default(0)
+  title          String
+  content        String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  author         User     @relation("writtenPosts", fields: [authorId, authorUsername], references: [id, username])
+  authorId       String
+  authorUsername String
 }
+
+//               ---- Need to push Prisma DB
+
+//  likedBy   User?   @relation("likedPosts", fields: [likedById], references: [id])
+//  likedById String?
+//  

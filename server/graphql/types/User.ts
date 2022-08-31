@@ -9,13 +9,15 @@ export const User = objectType({
     t.string('id');
     t.string('name');
     t.string('email');
+    t.string('username')
+    t.string('password')
     t.list.field('writtenPosts', {
       type: 'Post',
       async resolve(parent, args, context) {
         return await context.prisma.post.findMany({
           where: {
             authorId: parent.id
-          }
+          } 
         })
       },
     });
@@ -34,3 +36,5 @@ export const UserQuery = extendType({
      })
     },
   });
+
+
