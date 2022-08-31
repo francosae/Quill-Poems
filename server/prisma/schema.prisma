@@ -13,9 +13,9 @@ datasource db {
 model User {
   id           String  @id @default(uuid())
   name         String
-  email        String  @unique
+  email        String
   isAdmin      Boolean
-  writtenPosts Post[]  @relation("WrittenPosts")
+  writtenPosts Post[]  @relation("writtenPosts")
 }
 
 model Post {
@@ -23,6 +23,6 @@ model Post {
   rating    Float
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  author    User     @relation("WrittenPosts", fields: [authorId], references: [id])
+  author    User     @relation("writtenPosts", fields: [authorId], references: [id])
   authorId  String
 }

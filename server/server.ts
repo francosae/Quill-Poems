@@ -1,6 +1,6 @@
-import { typeDefs } from "./graphql/schema";
-import { resolvers } from "./graphql/resolvers";
+import { schema } from "./graphql/schema";
 import { PORT } from "./config"
+import { createContext } from "./graphql/context";
 const express = require('express');
 const http = require('http')
 const cors = require('cors')
@@ -14,8 +14,8 @@ async function startApolloServer() {
   const app = express();
   const httpServer = http.createServer(app);
   const server = new ApolloServer({
-    typeDefs,
-    resolvers,
+    schema,
+    context: createContext,
     csrfPrevention: true,
     cache: 'bounded',
     plugins: [
