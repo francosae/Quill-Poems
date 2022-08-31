@@ -1,6 +1,6 @@
 import React from 'react'
 import Typed from 'react-typed'
-import { Footer, Navbar} from "../../components/index"
+import { Footer, Navbar, Button} from "../../components/index"
 
 export default function Landing() {
   return (
@@ -34,8 +34,8 @@ const Hero = () => {
         </div>
         <p className='text-[#3626A7] md:text-2xl text-xl font-bold'>Interested in poetry? Want to read poems? Thinking of writing poems?</p>
         <ul className='md:flex justify-center'>
-        <li className='p-1'>  <button className='bg-[#180F70] w-[200px] rounded-md font-medium my-6 mx-auto py-3 text-[#EAE8FF] btn btn-primary'>Start Reading</button></li>
-        <li className='p-1'>  <button className='bg-[#180F70] w-[200px] rounded-md font-medium my-6 mx-auto py-3 text-[#EAE8FF] btn btn-primary'>Start Writing</button></li>
+        <li className='p-1'> <Button text="Start Reading"/></li>
+        <li className='p-1'> <Button text="Start Writing"/></li>
       </ul>
 
       </div>
