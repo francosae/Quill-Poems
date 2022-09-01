@@ -8,6 +8,11 @@ const Navbar = ({location}) => {
             <LoginNav/>
         )
         }
+    if (location === "/home"){
+      return(
+        <AuthNav/>
+      )
+    }
   return (
     <DefaultNav/>
   );
@@ -54,4 +59,44 @@ const LoginNav = () => {
         </ul>
         </div>
     )
+}
+
+
+const AuthNav = () => {
+    return(
+      <div className='flex max-w-full bg-[#EAE8FF]'>
+        <div className='flex justify-between items-center h-24 w-[1800px] mx-auto px-4 text-[#1F255B] bg-[#EAE8FF]'>
+          
+        <Link to="/home">
+        <h1 className='w-full text-3xl font-medium text-[#1F255B]'>Quill Poems</h1>
+        </Link>
+
+        <ul className='hidden sm:flex font-semibold'>
+          <li className='p-1'><UserDropdown/></li>
+        </ul>
+        </div>
+      </div>
+    )
+}
+
+function UserDropdown(){
+  return(
+    <div class="dropdown dropdown-end">
+    <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+      <div class="w-20 rounded-full">
+        <img src="https://placeimg.com/80/80/people" />
+      </div>
+    </label>
+    <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+      <li>
+        <a class="justify-between">
+          Profile
+          <span class="badge">New</span>
+        </a>
+      </li>
+      <li><a>Settings</a></li>
+      <li><a>Logout</a></li>
+    </ul>
+    </div>
+  )
 }

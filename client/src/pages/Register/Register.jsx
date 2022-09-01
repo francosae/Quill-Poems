@@ -247,9 +247,11 @@ function RegisterSecond(){
               Your @username is unique, and can be changed at any time.
           </p>
           <br></br>
+          <Link to= '/home'>
           <button className='bg-[#180F70] w-[320px] rounded-md font-medium my-6 mx-auto py-3 text-[#EAE8FF] btn btn-primary'>
             FINISH
           </button>
+          </Link>
         </div>
         <br></br>
       </div>
