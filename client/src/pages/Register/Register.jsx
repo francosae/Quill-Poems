@@ -212,11 +212,11 @@ function RegisterFirst(){
 
 function RegisterSecond(){
   return(
-  <div className='md:w-[320px] sm:w-[400px] w-[350px] mt-[-96px] h-screen mx-auto text-center flex flex-col justify-center '> 
+  <div className='w-[320px]  mt-[-96px] h-screen mx-auto text-center flex flex-col justify-center '> 
     <div className='mt-[-50px]'>
     <div className="mt-8 space-y-6 border-b-4 border-[#8375e7] hover:border-[#3626A7]" action="#" method="POST">
       
-    <p className='text-[#3626A7] md:text-3xl sm:text-2xl text-xl font-bold py-4'>
+    <p className='text-[#3626A7] text-3xl  font-bold py-4'>
           Enter a username 📛
     </p>
           <div className="-space-y-px rounded-md shadow-sm">
@@ -236,7 +236,7 @@ function RegisterSecond(){
               type="username"
               autoComplete="username"
               required
-              className="relative block md:w-[320px] sm:w-[200px] w-[150px] font-medium appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+              className="relative block w-[320px]  font-medium appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
               placeholder="@You"
             />
             
@@ -247,7 +247,9 @@ function RegisterSecond(){
               Your @username is unique, and can be changed at any time.
           </p>
           <br></br>
-          <Button text="FINISH" />
+          <button className='bg-[#180F70] w-[320px] rounded-md font-medium my-6 mx-auto py-3 text-[#EAE8FF] btn btn-primary'>
+            FINISH
+          </button>
         </div>
         <br></br>
       </div>
