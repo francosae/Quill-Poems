@@ -17,7 +17,7 @@ export default function Login() {
 
 function Content(){
   return(
-    <div className='md:w-[700px] sm:w-[500px] w-[350px] mt-[-96px] h-screen mx-auto text-center flex flex-col justify-center '> 
+    <div className='md:w-[600px] sm:w-[500px] w-[350px] mt-[-96px] h-screen mx-auto text-center flex flex-col justify-center '> 
     <form className="mt-8 space-y-6 border-b-8 border-[#8375e7] hover:border-[#3626A7]" action="#" method="POST">
     <p className='text-[#3626A7] md:text-4xl sm:text-3xl text-xl font-bold py-4'>
           Sign in to your account 📖
@@ -28,6 +28,7 @@ function Content(){
             <label htmlFor="email-address" className="sr-only">
               Email address
             </label>
+            
             <input
               id="email-address"
               name="email"
@@ -38,6 +39,7 @@ function Content(){
               placeholder="Enter your email"
             />
           </div>
+          <br></br>
           <div>
             <label htmlFor="password" className="sr-only">
               Password
@@ -70,7 +72,7 @@ function Content(){
         <div className='md:flex justify-center'>
           <button 
             type="submit"
-            className="group relative flex justify-center rounded-md bg-[#180F70] md:w-[700px] sm:w-[500px] w-[350px] font-medium my-6 mx-auto py-3 text-[#EAE8FF] btn btn-primary"
+            className="group relative flex justify-center rounded-md bg-[#180F70] md:w-[600px] sm:w-[500px] w-[350px] font-medium my-6 mx-auto py-3 text-[#EAE8FF] btn btn-primary"
           >
             <span className="hidden sm:flex absolute inset-y-0 left-0 items-center pl-3">
               <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />

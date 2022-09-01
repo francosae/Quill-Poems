@@ -3,7 +3,7 @@ import {Button} from './index'
 import { Link } from 'react-router-dom';
 
 const Navbar = ({location}) => {
-    if (location === "/Login"){
+    if (location === "/Login" || location === "/Register"){
         return (
             <LoginNav/>
         )
