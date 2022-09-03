@@ -1,7 +1,7 @@
 # Quill-Poems
 Poetry Sharing Web App 
 
-(PERN + GraphQL+Apollo+Prisma)
+(PERN + GraphQL)
 Using GraphQL with Apollo Supergraph.
 Using Prisma as a type-safe ORM.
 
