@@ -8,7 +8,7 @@ const Navbar = ({location}) => {
             <LoginNav/>
         )
         }
-    if (location === "/home"){
+    if (location === "auth"){
       return(
         <AuthNav/>
       )
@@ -64,8 +64,8 @@ const LoginNav = () => {
 
 const AuthNav = () => {
     return(
-      <div className='flex max-w-full bg-[#EAE8FF]'>
-        <div className='flex justify-between items-center h-24 w-[1800px] mx-auto px-4 text-[#1F255B] bg-[#EAE8FF]'>
+      <div className='flex max-w-full bg-[#EAE8FF] '>
+        <div className='flex justify-between items-center h-15 w-[1800px] mx-auto px-4 text-[#1F255B] bg-[#e3e0ff]'>
           
         <Link to="/home">
         <h1 className='w-full text-3xl font-medium text-[#1F255B]'>Quill Poems</h1>
@@ -83,7 +83,7 @@ function UserDropdown(){
   return(
     <div class="dropdown dropdown-end">
     <label tabindex="0" class="btn btn-ghost btn-circle avatar">
-      <div class="w-20 rounded-full">
+      <div class="w-9 rounded-full">
         <img src="https://placeimg.com/80/80/people" />
       </div>
     </label>
