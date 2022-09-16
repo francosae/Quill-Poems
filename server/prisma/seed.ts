@@ -6,13 +6,13 @@ import { users } from "../data/users";
 const prisma = new PrismaClient()
 
 async function main(){
-    // await prisma.user.createMany({
-    //     data: users
-    // })
-
-    await prisma.post.createMany({
-        data: posts,
+    await prisma.user.createMany({
+        data: users
     })
+
+    // await prisma.post.createMany({
+    //     data: posts,
+    // })
 }
 
 main()

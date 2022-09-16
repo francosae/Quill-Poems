@@ -24,7 +24,7 @@ model User {
 
 model Post {
   id             String   @id @default(uuid())
-  rating         Float
+  rating         Float    @default(0.0)
   likes          Int      @default(0)
   title          String
   content        String
