@@ -1,38 +1,28 @@
-import { schema } from "./graphql/schema";
-import { PORT } from "./config"
-import { createContext } from "./graphql/context";
-const express = require('express');
-const http = require('http')
+import prisma from "./lib/prisma"
+
+const express = require('express')
 const cors = require('cors')
-const { ApolloServer } = require('apollo-server-express');
-const {
-  ApolloServerPluginDrainHttpServer,
-  ApolloServerPluginLandingPageLocalDefault
-} = require('apollo-server-core');
+const { PORT } = require('./config')
+const app = express()
 
-async function startApolloServer() {
-  const app = express();
-  const httpServer = http.createServer(app);
-  const server = new ApolloServer({
-    schema,
-    context: createContext,
-    csrfPrevention: true,
-    cache: 'bounded',
-    plugins: [
-      ApolloServerPluginDrainHttpServer({ httpServer }),
-      ApolloServerPluginLandingPageLocalDefault({ embed: true }),
-    ],
-  });
+app.listen(PORT, () => {
+  console.log(`🚀 Server ready at http://localhost:${PORT}`)
+})
 
-  await server.start();
+app.use(express.json())
+app.use(cors())
 
-  // Additional middleware can be mounted at this point to run before Apollo.
-  app.use(cors())
+app.get('/', (req, res) =>{
+  res.status(200).send({ server_is: "up"})
+})
 
-  // Mount Apollo middleware here.
-  server.applyMiddleware({ app, path: '/api/graphql' });
-  await new Promise<void>(resolve => httpServer.listen({ port: PORT }, resolve));
-  console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`);
-  return { server, app };
-}
-startApolloServer();
+app.get('/users', async (req, res) => {
+  try {
+    const users = await prisma.user.findMany()
+    res.json(users)
+  } catch (error) {
+    res.status(500).json({
+      status: "Failed Request"
+    })
+  }
+})
