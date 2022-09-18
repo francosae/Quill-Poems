@@ -3,29 +3,44 @@ import { Navbar, Footer } from "../../components/index";
 
 export default function Home() {
   return (
-    <>
+    <div className="">
       <Navbar location={location.pathname} />
       <Content />
       <Footer />
-    </>
+    </div>
   );
 }
 
 function Content() {
   return (
-    <div className="max-w-max mx-auto">
-      <Sidebar />
-      <Post />
+    <div className="max-w-[1240px] mx-auto">
+      <div className="container columns-2 flex gap-2 items-baseline">
+        <Sidebar />
+        <div className="lg:columns-4 md:columns-3 sm:columns-2 xs:columns-1 gap-5">
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+        </div>
+      </div>
     </div>
   );
 }
 
 function Post() {
   return (
-    <div className="w-[250px] rounded-lg border border-gray-200 hover:bg-gray-100 shadow-md bg-white p-3.5">
-      <div className="font-bold">Upon a Child That Died</div>
-      <p className="font-light text-left">
-        Here she lies, a pretty bud, <br /> Lately made of flesh and blood,{" "}
+    <div className="w-[250px] mb-3 rounded-lg border border-gray-200 hover:bg-gray-100 shadow-md bg-white p-3.5">
+      <div className="font-bold mb-1">Upon a Child That Died</div>
+      <p className="font-light text-left leading-relaxed">
+        Here she lies, a pretty bud, <br /> Lately made of flesh and blood,
         <br /> Who as soon fell fast asleep <br /> As her little eyes did peep.{" "}
         <br /> Give her strewings, but not stir <br />
         The earth that lightly covers her.
@@ -66,7 +81,7 @@ function Post() {
 function Sidebar() {
   return (
     <aside class="w-64" aria-label="Sidebar">
-      <div class="overflow-y-auto py-4 px-3 bg-gray-50 rounded">
+      <div class="overflow-y-auto py-4 px-3 rounded">
         <ul class="space-y-2">
           <li>
             <a
