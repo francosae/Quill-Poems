@@ -1,7 +1,15 @@
 import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Login, Register, Landing, Home, PoetryQuiz} from "./pages/index"
-// import { Footer, Navbar} from "./components/index"
+import { AuthContextProvider } from "./contexts/auth"
+
+export default function AppContainer(){
+  return(
+    <AuthContextProvider>
+      <App />
+    </AuthContextProvider>
+  )
+}
 
 function App() {
   return (
@@ -18,5 +26,3 @@ function App() {
     </div>
   )
 }
-
-export default App

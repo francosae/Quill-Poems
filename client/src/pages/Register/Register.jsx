@@ -3,16 +3,17 @@ import { LockClosedIcon } from '@heroicons/react/20/solid'
 import { Footer, Navbar } from "../../components/index"
 import { useLocation, Link, Routes, Route } from 'react-router-dom'
 import { Button } from '../../components/index'
-
+import { useRegistrationForm } from '../../hooks/useRegistrationForm'
 export default function Login() {
   let location = useLocation();
-
+  const { form, isProcessing, handleOnInputChange, handleOnSubmit } = useRegistrationForm();
+  console.log(form)
   return (
     <>
       <Navbar location={location.pathname}/>
         <Routes>
-          <Route path="/" element={<RegisterFirst />} />
-          <Route path="/flow" element={<RegisterSecond />} />
+          <Route path="/" element={<RegisterFirst handleOnInputChange={handleOnInputChange} />} />
+          <Route path="/flow" element={<RegisterSecond handleOnInputChange={handleOnInputChange} handleOnSubmit={handleOnSubmit} />} />
         </Routes>
       <Footer/>
     </>
@@ -20,7 +21,7 @@ export default function Login() {
 }
 
 
-function RegisterFirst(){
+function RegisterFirst({handleOnInputChange}){
   return(
     <div className='md:w-[700px] sm:w-[500px] w-[350px] mt-[-96px] h-screen mx-auto text-center flex flex-col justify-center '> 
     <div className='mt-[-50px]'>
@@ -47,6 +48,7 @@ function RegisterFirst(){
               name="firstName"
               type="firstName"
               autoComplete="firstName"
+              onChange={handleOnInputChange}
               required
               className="relative block md:w-[320px] sm:w-[200px] w-[150px] font-medium appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
               placeholder="Enter your first name"
@@ -62,6 +64,7 @@ function RegisterFirst(){
               name="lastName"
               type="lastName"
               autoComplete="lastName"
+              onChange={handleOnInputChange}
               required
               className="relative block md:w-[320px] sm:w-[200px] w-[150px] font-medium appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
               placeholder="Enter your last name"
@@ -81,6 +84,7 @@ function RegisterFirst(){
               name="email"
               type="email"
               autoComplete="email"
+              onChange={handleOnInputChange}
               required
               className="relative block w-full font-medium appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
               placeholder="Enter your email"
@@ -102,6 +106,7 @@ function RegisterFirst(){
               type="password"
               pattern=".{8,}"
               autoComplete="password"
+              onChange={handleOnInputChange}
               required
               className="relative block md:w-[320px] sm:w-[200px] w-[150px] font-medium appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
               placeholder="Create a password, minimum 8 characters."
@@ -118,6 +123,7 @@ function RegisterFirst(){
               type="passwordConfirm"
               pattern=".{8,}"
               autoComplete="passwordConfirm"
+              onChange={handleOnInputChange}
               required
               className="relative block md:w-[320px] sm:w-[200px] w-[150px] font-medium appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
               placeholder="Confirm your password"
@@ -160,6 +166,7 @@ function RegisterFirst(){
               id="day"
               name="day"
               type="number"
+              placeholder="1"
               autoComplete="day"
               required
               class="relative block md:w-[200px] sm:w-[150px] w-[100px] font-medium appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -172,9 +179,11 @@ function RegisterFirst(){
           </p>
           <input
               id="year"
-              name="year"
-              type="number"
+              name="birthday"
+              placeholder="2000"
+              min="1900"
               autoComplete="year"
+              onChange={handleOnInputChange}
               required
               class="relative block md:w-[200px] sm:w-[150px] w-[100px] font-medium appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
           />
@@ -210,7 +219,7 @@ function RegisterFirst(){
   )
 }
 
-function RegisterSecond(){
+function RegisterSecond({ handleOnInputChange, handleOnSubmit}){
   return(
   <div className='w-[320px]  mt-[-96px] h-screen mx-auto text-center flex flex-col justify-center '> 
     <div className='mt-[-50px]'>
@@ -235,6 +244,7 @@ function RegisterSecond(){
               name="username"
               type="username"
               autoComplete="username"
+              onChange={handleOnInputChange}
               required
               className="relative block w-[320px]  font-medium appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
               placeholder="@You"
@@ -248,7 +258,7 @@ function RegisterSecond(){
           </p>
           <br></br>
           <Link to= '/home'>
-          <button className='bg-[#180F70] w-[320px] rounded-md font-medium my-6 mx-auto py-3 text-[#EAE8FF] btn btn-primary'>
+          <button onClick={handleOnSubmit} className='bg-[#180F70] w-[320px] rounded-md font-medium my-6 mx-auto py-3 text-[#EAE8FF] btn btn-primary'>
             FINISH
           </button>
           </Link>

@@ -55,7 +55,8 @@ router.post('/register', async (req, res, next) => {
         // Formatting fields 
         const formattedEmail = userData.email.toLowerCase()
         const formattedBirthday = new Date(userData.birthday.toString());
-
+        console.log(formattedBirthday)
+        
         // Creating new user with fields.
         const newUser = await prisma.user.create({
             data: {
@@ -128,14 +129,16 @@ router.post('/login', async (req, res, next) => {
 
 router.get('/me', security.requireAuthenticatedUser, async (req, res, next) => {
     try {
-        const { email } = res.locals.user
-        const existingUser = await prisma.user.findUnique({
-            where: {
-                email: email
-            }
-        })
-        delete existingUser['password'];
-        res.status(200).json({ existingUser })
+        console.log(res.locals.user)
+
+        // const { email } = res.locals.user
+        // const existingUser = await prisma.user.findUnique({
+        //     where: {
+        //         email: email
+        //     }
+        // })
+        // delete existingUser['password'];
+        // res.status(200).json({ existingUser })
     } catch (err){
         next(err)
     }

@@ -3,6 +3,7 @@ const express = require('express')
 const router = express.Router()
 import { title } from "process"
 import prisma from "../lib/prisma"
+const security = require('../middleware/security')
 
 router.get('/', async (req, res) => {
     try {
@@ -27,7 +28,22 @@ router.get('/:author', async (req, res) => {
     }
 })
 
-router.delete('/:author/:id', async(req, res) => {
+router.get('/:author/:id', async(req, res) => {
+    const id = req.params.id
+    try {
+        const authoredPost = await prisma.post.findUnique({
+            where: {
+                id: id,
+            }
+        })
+        res.json(authoredPost)
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+
+router.delete('/:author/:id',  security.requireAuthenticatedUser, async(req, res) => {
     const author = req.params.author
     const id = req.params.id
     try {
@@ -42,7 +58,7 @@ router.delete('/:author/:id', async(req, res) => {
     }
 })
 
-router.post('/:author', async (req,res) => {
+router.post('/:author', security.requireAuthenticatedUser, async (req,res) => {
     const author = req.params.author
     const title = req.body.title
     const content = req.body.content

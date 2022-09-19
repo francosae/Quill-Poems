@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Button } from "./index";
 import { Link } from "react-router-dom";
-
+import API from "../services/apiClient";
 const Navbar = ({ location }) => {
   if (location === "/login" || location === "/signup") {
     return <LoginNav />;
   }
-  if (location === "auth") {
+  if (location === "/home") {
     return <AuthNav />;
   }
   return <DefaultNav />;
@@ -123,7 +123,7 @@ function UserDropdown() {
           <a>Settings</a>
         </li>
         <li>
-          <a>Logout</a>
+          <a onClick={() => {API.logoutUser()}}>Logout</a>
         </li>
       </ul>
     </div>
