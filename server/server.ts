@@ -16,7 +16,7 @@ app.listen(PORT, () => {
 app.use(express.json())
 app.use(cors())
 app.use(security.extractUserFromJwt);
-app.use('/users', users)
+app.use('/user', users)
 app.use('/posts', posts)
 app.use('/auth', auth)
 

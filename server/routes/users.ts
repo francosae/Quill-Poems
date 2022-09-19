@@ -18,21 +18,41 @@ router.get('/', async (req, res) => {
   })
 
 router.get('/:username', async (req, res) => {
-  const { username } = req.params.username  
+  const { username } = req.params
   try {
-      const user = await prisma.user.findMany({
-        where:{
+      const user = await prisma.user.findUnique({
+        where: {
           username: username
         },
         include: {
           writtenPosts: true,
         }
       })
-      delete user[0].password
+      delete user['password']
       res.json(user)
     } catch (error) {
       console.log(error)
     }
   })
+
+router.post('/:username', async (req, res) => {
+  const { username } = req.params
+  const { bio } = req.body
+  try {
+    const updatedBio = await prisma.user.update({
+      where:{
+        username: username
+      },
+      data:{
+        bio: bio,
+      }
+    })
+    
+    res.json(updatedBio)
+  } catch (error){
+    console.log(error)
+  }
+})
+
 
 module.exports = router;
