@@ -54,6 +54,13 @@ class ApiClient {
 	async logoutUser() {
 		localStorage.removeItem(this.tokenName);
 	}
+
+    async fetchPosts(){
+        return await this.request({
+            endpoint: `posts/`,
+            method: `GET`
+        })
+    }
 }
 
 const API = new ApiClient("http://localhost:4000");

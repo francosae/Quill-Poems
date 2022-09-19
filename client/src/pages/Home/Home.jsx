@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
+import { useEffect } from "react";
 import { Navbar, Footer } from "../../components/index";
-
+import API from "../../services/apiClient";
 export default function Home() {
   return (
     <div className="">
@@ -12,38 +13,35 @@ export default function Home() {
 }
 
 function Content() {
+  const [posts , setPosts] = useState(null)
+  useEffect(() => {
+    async function fetchPosts(){
+      const { data } = await API.fetchPosts()
+      setPosts(data)
+    }
+    fetchPosts()
+  }, [])
+
   return (
     <div className="max-w-[1240px] mx-auto">
       <div className="container columns-2 flex gap-2 items-baseline">
         <Sidebar />
         <div className="lg:columns-4 md:columns-3 sm:columns-2 xs:columns-1 gap-5">
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
+          {posts?.map((post, index) => {
+              return <Post key={index} post={post} />
+          })}
         </div>
       </div>
     </div>
   );
 }
 
-function Post() {
+function Post({ post }) {
   return (
-    <div className="w-[250px] mb-3 rounded-lg border border-gray-200 hover:bg-gray-100 shadow-md bg-white p-3.5">
-      <div className="font-bold mb-1">Upon a Child That Died</div>
+    <div key={post.id} className="w-[250px] mb-3 rounded-lg border border-gray-200 hover:bg-gray-100 shadow-md bg-white p-3.5">
+      <div className="font-bold mb-1">{post.title}</div>
       <p className="font-light text-left leading-relaxed">
-        Here she lies, a pretty bud, <br /> Lately made of flesh and blood,
-        <br /> Who as soon fell fast asleep <br /> As her little eyes did peep.{" "}
-        <br /> Give her strewings, but not stir <br />
-        The earth that lightly covers her.
+        {post.content}
       </p>
       <div class="flex items-center space-x-1 mt-4">
         <div class="flex-shrink-0">
@@ -54,7 +52,7 @@ function Post() {
           />
         </div>
         <div class="flex-1">
-          <p class="text-sm font-semibold">Jane Doe</p>
+          <p class="text-sm font-semibold">{post.authorUsername}</p>
         </div>
 
         <div>

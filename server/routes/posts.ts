@@ -58,7 +58,7 @@ router.delete('/:author/:id',  security.requireAuthenticatedUser, async(req, res
     }
 })
 
-router.post('/:author', security.requireAuthenticatedUser, async (req,res) => {
+router.post('/:author', async (req,res) => {
     const author = req.params.author
     const title = req.body.title
     const content = req.body.content
