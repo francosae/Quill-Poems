@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "./index";
+import { Button, PostCreationModal } from "./index";
 import { Link } from "react-router-dom";
 import API from "../services/apiClient";
 const Navbar = ({ location }) => {
@@ -90,13 +90,16 @@ const AuthNav = () => {
             Quill Poems
           </h1>
         </Link>
-
+        <label  htmlFor="createpost" className='bg-[#180F70] w-[150px] rounded-md font-medium my-6 mx-auto py-3 text-[#EAE8FF] btn btn-primary modal-button'>
+        Create Post
+        </label >
         <ul className="hidden sm:flex font-semibold">
           <li className="p-1">
             <UserDropdown />
           </li>
         </ul>
       </div>
+      <PostCreationModal />
     </div>
   );
 };

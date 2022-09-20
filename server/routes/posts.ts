@@ -70,8 +70,8 @@ router.delete('/:author/:id',  security.requireAuthenticatedUser, async(req, res
 
 router.post('/:author', async (req,res) => {
     const author = req.params.author
-    const title = req.body.title
-    const content = req.body.content
+    const { data } = req.body
+    console.log(data)
     try {
         const user = await prisma.user.findUnique({
             where: {
@@ -84,8 +84,8 @@ router.post('/:author', async (req,res) => {
                 author: {
                     connect: { id: user.id },
                   },
-                content: content,
-                title: title
+                content: data.content,
+                title: data.title
             }
         })
         res.json(createdPost)

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Navbar, Footer } from "../../components/index";
+import { Navbar, Footer, PostCreationModal } from "../../components/index";
 import API from "../../services/apiClient";
 export default function Home() {
   return (

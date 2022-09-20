@@ -13,7 +13,7 @@ export default function Post({}) {
         }
         fetchPostData()
     }, [])
-
+    console.log(postData)
   return (
     <>
     {postData ? <PostCard post={postData} /> : <>nothing here</>}

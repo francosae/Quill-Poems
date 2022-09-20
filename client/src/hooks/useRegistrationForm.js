@@ -7,7 +7,6 @@ export const useRegistrationForm = () => {
 	const { user, setUser } = useAuthContext();
 	const { form, errors, setErrors, handleOnInputChange } =
 		useAuthenticationForm({ user });
-	console.log(form)
 	const [isProcessing, setIsProcessing] = useState(false);
 
 	const handleOnSubmit = async () => {

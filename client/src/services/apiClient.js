@@ -75,6 +75,14 @@ class ApiClient {
 			method: `GET`
 		})
 	}
+
+	async createPost(endpoint, data){
+		return await this.request({
+			endpoint: endpoint,
+			method: `POST`,
+			data: data,
+		})
+	}
 }
 
 const API = new ApiClient("http://localhost:4000");
