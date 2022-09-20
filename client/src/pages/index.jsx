@@ -4,4 +4,5 @@ import Landing from "./Landing/Landing";
 import Home from "./Home/Home";
 import PoetryQuiz from "./PoetryQuiz/PoetryQuiz";
 import Profile from "./Profile/Profile";
-export {Login, Register, Landing, Home, PoetryQuiz, Profile}
+import Post from "./Post/Post";
+export {Login, Register, Landing, Home, PoetryQuiz, Profile, Post}

@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Navbar, Footer } from "../../components/index";
 import API from "../../services/apiClient";
 export default function Home() {
@@ -38,6 +39,7 @@ function Content() {
 
 function Post({ post }) {
   return (
+    <Link to={`/posts/${post.authorUsername}/${post.id}`}>
     <div key={post.id} className="w-[250px] mb-3 rounded-lg border border-gray-200 hover:bg-gray-100 shadow-md bg-white p-3.5">
       <div className="font-bold mb-1">{post.title}</div>
       <p className="font-light text-left leading-relaxed">
@@ -73,6 +75,7 @@ function Post({ post }) {
         </div>
       </div>
     </div>
+    </Link>
   );
 }
 

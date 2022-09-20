@@ -68,6 +68,13 @@ class ApiClient {
             method: `GET`
         })
     }
+
+	async fetchUserPost(endpoint){
+		return await this.request({
+			endpoint: endpoint,
+			method: `GET`
+		})
+	}
 }
 
 const API = new ApiClient("http://localhost:4000");
