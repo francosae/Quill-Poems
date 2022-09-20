@@ -13,7 +13,7 @@ class ApiClient {
 	}
 
 	async request({ endpoint, method = `GET`, data = {} }) {
-		const url = `${this.remoteHostUrl}/${endpoint}`;
+		const url = `${this.remoteHostUrl}${endpoint}`;
 
 		const headers = {
 			"Content-Type": "application/json",
@@ -37,7 +37,7 @@ class ApiClient {
 
 	async registerUser(credentials) {
 		return await this.request({
-			endpoint: `auth/register`,
+			endpoint: `/auth/register`,
 			method: `POST`,
 			data: credentials,
 		});
@@ -45,7 +45,7 @@ class ApiClient {
 
 	async loginUser(credentials) {
 		return await this.request({
-			endpoint: `auth/login`,
+			endpoint: `/auth/login`,
 			method: `POST`,
 			data: credentials,
 		});
@@ -57,7 +57,14 @@ class ApiClient {
 
     async fetchPosts(){
         return await this.request({
-            endpoint: `posts/`,
+            endpoint: `/posts/`,
+            method: `GET`
+        })
+    }
+
+    async fetchUserData(endpoint) {
+        return await this.request({
+            endpoint: endpoint,
             method: `GET`
         })
     }

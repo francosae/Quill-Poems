@@ -7,7 +7,11 @@ const security = require('../middleware/security')
 
 router.get('/', async (req, res) => {
     try {
-      const posts = await prisma.post.findMany()
+      const posts = await prisma.post.findMany({
+        include: {
+            comments: true,
+        }
+      })
       res.json(posts)
     } catch (error) {
       console.log(error)
@@ -20,6 +24,9 @@ router.get('/:author', async (req, res) => {
      const posts = await prisma.post.findMany({
         where: {
             authorUsername: author,
+        },
+        include:{
+            comments: true,
         }
      })
      res.json(posts)
@@ -34,6 +41,9 @@ router.get('/:author/:id', async(req, res) => {
         const authoredPost = await prisma.post.findUnique({
             where: {
                 id: id,
+            },
+            include: {
+                comments: true,
             }
         })
         res.json(authoredPost)

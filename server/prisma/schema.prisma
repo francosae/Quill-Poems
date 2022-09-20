@@ -11,32 +11,45 @@ datasource db {
 }
 
 model User {
-  id           String  @id @default(uuid())
-  username     String  @unique
-  firstName    String
-  lastName     String
-  birthday     String
-  email        String  @unique
-  password     String
-  isAdmin      Boolean
-  bio          String?
-  writtenPosts Post[]  @relation("writtenPosts")
+  id              String    @id @default(uuid())
+  username        String    @unique
+  firstName       String
+  lastName        String
+  birthday        String
+  email           String    @unique
+  password        String
+  isAdmin         Boolean
+  bio             String?
+  writtenPosts    Post[]    @relation("writtenPosts")
+  writtenComments Comment[] @relation("writtenComments")
   // userProfile  Profile[] @relation("userProfile")
 
   @@unique([id, username])
 }
 
 model Post {
-  id             String   @id @default(uuid())
-  rating         Float    @default(0.0)
-  likes          Int      @default(0)
+  id             String    @id @default(uuid())
+  rating         Float     @default(0.0)
+  likes          Int       @default(0)
   title          String
   content        String
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  author         User     @relation("writtenPosts", fields: [authorId, authorUsername], references: [id, username])
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  author         User      @relation("writtenPosts", fields: [authorId, authorUsername], references: [id, username])
   authorId       String
   authorUsername String
+  comments       Comment[] @relation("comments")
+}
+
+model Comment {
+  id             String   @id @default(uuid())
+  likes          Int      @default(0)
+  content        String
+  createdAt      DateTime @default(now())
+  author         User     @relation("writtenComments", fields: [authorUsername], references: [username])
+  authorUsername String
+  post           Post     @relation("comments", fields: [postId], references: [id])
+  postId         String
 }
 
 // model Profile {

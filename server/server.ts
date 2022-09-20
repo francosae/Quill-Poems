@@ -7,6 +7,7 @@ const app = express()
 const users = require('./routes/users')
 const posts = require('./routes/posts')
 const auth = require('./routes/auth')
+const comments = require('./routes/comments')
 const security = require('./middleware/security')
 
 app.listen(PORT, () => {
@@ -18,7 +19,9 @@ app.use(cors())
 app.use(security.extractUserFromJwt);
 app.use('/user', users)
 app.use('/posts', posts)
+app.use('/comments', comments)
 app.use('/auth', auth)
+
 
 app.get('/', (req, res) =>{
   res.status(200).send({ server_is: "up"})
