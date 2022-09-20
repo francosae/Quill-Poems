@@ -63,6 +63,7 @@ class ApiClient {
     }
 
     async fetchUserData(endpoint) {
+		// Endpoint format is `/user/$[user.username}/`
         return await this.request({
             endpoint: endpoint,
             method: `GET`
@@ -70,6 +71,7 @@ class ApiClient {
     }
 
 	async fetchUserPost(endpoint){
+		// Endpoint format is `/posts/${user.username}/${post.id}`
 		return await this.request({
 			endpoint: endpoint,
 			method: `GET`
@@ -77,6 +79,7 @@ class ApiClient {
 	}
 
 	async createPost(endpoint, data){
+		// Endpoint format is `/posts/${user.username}`,
 		return await this.request({
 			endpoint: endpoint,
 			method: `POST`,
