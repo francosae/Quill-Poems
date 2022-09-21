@@ -23,13 +23,25 @@ model User {
   writtenPosts    Post[]    @relation("writtenPosts")
   writtenComments Comment[] @relation("writtenComments")
   // userProfile  Profile[] @relation("userProfile")
+  likedPosts      Post[]    @relation("likedPosts")
+  favoritedPosts  Post[]    @relation("favoritedPosts")
+  followedBy      Follows[] @relation("following")
+  following       Follows[] @relation("follower")
 
   @@unique([id, username])
 }
 
+model Follows {
+  follower    User   @relation("follower", fields: [followerId], references: [id])
+  followerId  String
+  following   User   @relation("following", fields: [followingId], references: [id])
+  followingId String
+
+  @@id([followerId, followingId])
+}
+
 model Post {
   id             String    @id @default(uuid())
-  rating         Float     @default(0.0)
   likes          Int       @default(0)
   title          String
   content        String
@@ -38,6 +50,8 @@ model Post {
   author         User      @relation("writtenPosts", fields: [authorId, authorUsername], references: [id, username])
   authorId       String
   authorUsername String
+  likedBy        User[]    @relation("likedPosts")
+  favortedBy     User[]    @relation("favoritedPosts")
   comments       Comment[] @relation("comments")
 }
 
