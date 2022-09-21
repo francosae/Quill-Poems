@@ -1,8 +1,9 @@
 import React, {useState} from "react";
 import { useEffect } from "react";
-
+import { Link } from "react-router-dom";
 export default function PostCard({ post }) {
     return (
+      <Link to={`/posts/${post.authorUsername}/${post.id}`}>
       <div key={post.id} className="w-[250px] mb-3 rounded-lg border border-gray-200 hover:bg-gray-100 shadow-md bg-white p-3.5">
         <div className="font-bold mb-1">{post.title}</div>
         <p className="font-light text-left leading-relaxed">
@@ -38,5 +39,6 @@ export default function PostCard({ post }) {
           </div>
         </div>
       </div>
+      </Link>
     );
   }

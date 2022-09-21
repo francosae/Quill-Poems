@@ -14,7 +14,7 @@ export default function AppContainer(){
 function App() {
   return (
     <div data-theme="light">
-      <BrowserRouter>
+      <BrowserRouter forceRefresh={true}>
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
