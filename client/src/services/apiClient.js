@@ -86,6 +86,16 @@ class ApiClient {
 			data: data,
 		})
 	}
+
+	async createComment(endpoint, data){
+		// Endpoint format is `/comments/${post.id}`,
+		return await this.request({
+			endpoint: endpoint,
+			method: `POST`,
+			data: data,
+		})
+	}
+
 }
 
 const API = new ApiClient("http://localhost:4000");

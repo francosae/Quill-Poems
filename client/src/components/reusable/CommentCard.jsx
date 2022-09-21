@@ -1,15 +1,13 @@
 import React, {useState} from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-export default function PostCard({ post }) {
+export default function CommentCard({ data }) {
     return (
-      <Link to={`/posts/${post.authorUsername}/${post.id}`}>
-      <div key={post.id} className="w-[250px] mb-3 rounded-lg border border-gray-200 hover:bg-gray-100 shadow-md bg-white p-3.5">
-        <div className="font-bold mb-1">{post.title}</div>
+      <Link to={`/user/${data.authorUsername}/`}>
+      <div key={data.id} className="w-[250px] mb-3 rounded-lg border border-gray-200 hover:bg-gray-100 shadow-md bg-white p-3.5">
         <p className="font-light text-left leading-relaxed">
-          {post.content}
+          {data.content}
         </p>
-        
         <div class="flex items-center space-x-1 mt-4">
           <div class="flex-shrink-0">
             <img
@@ -18,12 +16,10 @@ export default function PostCard({ post }) {
               alt="Neil image"
             />
           </div>
-          
-          <Link to={`/user/${post.authorUsername}/`}>
           <div class="flex-1">
-            <p class="text-sm font-semibold">{post.authorUsername}</p>
+            <p class="text-sm font-semibold">{data.authorUsername}</p>
           </div>
-          </Link>
+  
           <div>
             <svg
               class="w-6 h-6"
