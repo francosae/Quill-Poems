@@ -32,7 +32,7 @@ class ApiClient {
 	}
 
 	async fetchUserFromToken() {
-		return await this.request({ endpoint: `auth/me`, method: `GET` });
+		return await this.request({ endpoint: `/auth/me`, method: `GET` });
 	}
 
 	async registerUser(credentials) {

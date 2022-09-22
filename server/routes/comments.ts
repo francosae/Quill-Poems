@@ -25,8 +25,8 @@ router.get('/:postid', async (req, res) => {
     }
   })
 
-router.post('/:postid', async (req, res) => {
-    const { postid } = req.params
+router.post('/:username/:postid', async (req, res) => {
+    const { postid, username } = req.params
     const { content } = req.body
     try {
       const post = await prisma.post.findUnique({
@@ -35,11 +35,12 @@ router.post('/:postid', async (req, res) => {
         },
       })
 
+
       const createdComment = await prisma.comment.create({
         data:{
             content: content,
             author: {
-                connect: { id: post?.authorId },
+                connect: { username: username },
               },
             post: {
                 connect: { id: post.id }
@@ -52,7 +53,7 @@ router.post('/:postid', async (req, res) => {
     }
   })
 
-router.delete('/:postid', async (req, res) => {
+router.delete('/:username/:postid', async (req, res) => {
     const { postid } = req.params
     const { commentid } = req.body
     try {

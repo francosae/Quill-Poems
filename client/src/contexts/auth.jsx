@@ -8,10 +8,11 @@ export const AuthContextProvider = ({ children }) => {
 	const [user, setUser] = useState({});
 
 	useEffect(() => {
+		console.log(user)
 		const fetchUser = async () => {
 			const { data } = await apiClient.fetchUserFromToken();
 			if (data) {
-				console.log(data)
+				setUser(data.existingUser)
 			}
 			setInitialized(true);
 		};

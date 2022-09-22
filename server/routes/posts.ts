@@ -74,7 +74,6 @@ router.delete('/:author/:id',  security.requireAuthenticatedUser, async(req, res
 router.post('/:author', async (req,res) => {
     const author = req.params.author
     const { data } = req.body
-    console.log(data)
     try {
         const user = await prisma.user.findUnique({
             where: {

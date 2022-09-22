@@ -129,16 +129,15 @@ router.post('/login', async (req, res, next) => {
 
 router.get('/me', security.requireAuthenticatedUser, async (req, res, next) => {
     try {
-        console.log(res.locals.user)
+        const user = res.locals.user
 
-        // const { email } = res.locals.user
-        // const existingUser = await prisma.user.findUnique({
-        //     where: {
-        //         email: email
-        //     }
-        // })
-        // delete existingUser['password'];
-        // res.status(200).json({ existingUser })
+        const existingUser = await prisma.user.findUnique({
+            where: {
+                email: user.email
+            }
+        })
+        delete existingUser['password'];
+        res.status(200).json({ existingUser })
     } catch (err){
         next(err)
     }

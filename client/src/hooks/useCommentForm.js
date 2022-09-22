@@ -12,10 +12,9 @@ export const useCommentForm = () => {
 	const handleOnInputChange = (event) => {
 		setForm((f) => ({ ...f, [event.target?.name]: event.target?.value }));
 	};
-
     const handleOnSubmit = async () => {
         const { data, error } = await API.createComment(
-        `/comments/${postId}`,
+        `/comments/${user.username}/${postId}`,
         { 
           content: form.content,
         }
