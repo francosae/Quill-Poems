@@ -3,8 +3,11 @@ import React from 'react'
 import { usePostForm } from '../hooks/usePostForm'
 
 function PostCreationModal() {
-  const { form, handleOnInputChange, handleOnSubmit } = usePostForm()
-  console.log(form)
+  const { form, handleOnInputChange, handleOnSubmit, postCreated } = usePostForm()
+
+  if (postCreated === true){
+    window.location.reload(false);
+}
   return (
     <>
     <input type="checkbox" id="createpost" className="modal-toggle" />
