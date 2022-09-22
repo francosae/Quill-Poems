@@ -26,6 +26,11 @@ router.get('/:username', async (req, res) => {
         },
         include: {
           writtenPosts: true,
+          writtenComments: true,
+          likedPosts: true,
+          favoritedPosts: true,
+          followedBy: true,
+          following: true,
         }
       })
       delete user['password']

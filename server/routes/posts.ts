@@ -10,6 +10,7 @@ router.get('/', async (req, res) => {
       const posts = await prisma.post.findMany({
         include: {
             comments: true,
+            likedBy: true,
         }
       })
       res.json(posts)
@@ -27,6 +28,7 @@ router.get('/:author', async (req, res) => {
         },
         include:{
             comments: true,
+            likedBy: true,
         }
      })
      res.json(posts)
@@ -44,6 +46,7 @@ router.get('/:author/:id', async(req, res) => {
             },
             include: {
                 comments: true,
+                likedBy: true,
             }
         })
         res.json(authoredPost)
@@ -93,5 +96,119 @@ router.post('/:author', async (req,res) => {
         console.log(error)
     }
 })
+
+router.post('/like/:username/:postid', async (req,res) => {
+    const { postid, username } = req.params
+    try{
+        const user = await prisma.user.findUnique({
+            where: {
+                username: username
+            }
+        })
+        delete user['password'];
+        const interactedPost = await prisma.post.update({
+            where: {
+                id: postid
+            }, 
+            data: {
+                likedBy: {
+                    connect: { id: user.id }
+                }
+            },
+            include:{
+                likedBy: true,
+            }
+        })
+        
+        res.json(interactedPost)
+    } catch (error)
+    {console.log(error)}
+})
+
+router.post('/unlike/:username/:postid', async (req,res) => {
+    const { postid, username } = req.params
+    try{
+        const user = await prisma.user.findUnique({
+            where: {
+                username: username
+            }
+        })
+        delete user['password'];
+        const interactedPost = await prisma.post.update({
+            where: {
+                id: postid
+            }, 
+            data: {
+                likedBy: {
+                    disconnect: { id: user.id }
+                }
+            },
+            include:{
+                likedBy: true,
+            }
+        })
+        
+        res.json(interactedPost)
+    } catch (error)
+    {console.log(error)}
+})
+
+
+router.post('/favorite/:username/:postid', async (req,res) => {
+    const { postid, username } = req.params
+    try{
+        const user = await prisma.user.findUnique({
+            where: {
+                username: username
+            }
+        })
+        delete user['password'];
+        const interactedPost = await prisma.post.update({
+            where: {
+                id: postid
+            }, 
+            data: {
+                favoritedBy: {
+                    connect: { id: user.id }
+                }
+            },
+            include:{
+                favoritedBy: true,
+            }
+        })
+        
+        res.json(interactedPost)
+    } catch (error)
+    {console.log(error)}
+})
+
+router.post('/unfavorite/:username/:postid', async (req,res) => {
+    const { postid, username } = req.params
+    try{
+        const user = await prisma.user.findUnique({
+            where: {
+                username: username
+            }
+        })
+        delete user['password'];
+        const interactedPost = await prisma.post.update({
+            where: {
+                id: postid
+            }, 
+            data: {
+                favoritedBy: {
+                    disconnect: { id: user.id }
+                }
+            },
+            include:{
+                favoritedBy: true,
+            }
+        })
+        
+        res.json(interactedPost)
+    } catch (error)
+    {console.log(error)}
+})
+
 
 module.exports = router;

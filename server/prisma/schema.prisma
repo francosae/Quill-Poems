@@ -22,22 +22,14 @@ model User {
   bio             String?
   writtenPosts    Post[]    @relation("writtenPosts")
   writtenComments Comment[] @relation("writtenComments")
-  // userProfile  Profile[] @relation("userProfile")
   likedPosts      Post[]    @relation("likedPosts")
   favoritedPosts  Post[]    @relation("favoritedPosts")
-  followedBy      Follows[] @relation("following")
-  following       Follows[] @relation("follower")
+  followedBy      User[]    @relation("UserFollows")
+  followCount     Int       @default(0)
+  following       User[]    @relation("UserFollows")
+  followingCount  Int       @default(0)
 
   @@unique([id, username])
-}
-
-model Follows {
-  follower    User   @relation("follower", fields: [followerId], references: [id])
-  followerId  String
-  following   User   @relation("following", fields: [followingId], references: [id])
-  followingId String
-
-  @@id([followerId, followingId])
 }
 
 model Post {
@@ -51,7 +43,7 @@ model Post {
   authorId       String
   authorUsername String
   likedBy        User[]    @relation("likedPosts")
-  favortedBy     User[]    @relation("favoritedPosts")
+  favoritedBy    User[]    @relation("favoritedPosts")
   comments       Comment[] @relation("comments")
 }
 
@@ -65,17 +57,3 @@ model Comment {
   post           Post     @relation("comments", fields: [postId], references: [id])
   postId         String
 }
-
-// model Profile {
-//   id       String  @id @default(uuid())
-//   bio      String?
-//   user     User    @relation("userProfile", fields: [userId, username], references: [id, username])
-//   userId   String
-//   username String
-// }
-
-//               ---- Need to push Prisma DB
-
-//  likedBy   User?   @relation("likedPosts", fields: [likedById], references: [id])
-//  likedById String?
-//  

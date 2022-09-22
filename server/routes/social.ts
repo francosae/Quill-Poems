@@ -3,19 +3,79 @@ const express = require('express')
 const router = express.Router()
 import prisma from "../lib/prisma"
 
-router.get('/:postid', async (req, res) => {
-    const { postid } = req.params
+router.post('/follow/:username/:receptor', async (req, res) => {
+    const { username, receptor } = req.params
+
     try {
-      res.json({post, comments})
+        if (username == receptor){
+            res.json({cant: "execute"})
+        }
+        const followerUser = await prisma.user.findUnique({
+            where:{
+                username: username
+            }
+        })
+
+        const followedUser = await prisma.user.findUnique({
+            where: {
+              username: receptor
+            },
+        })
+        const exchange = await prisma.user.update({
+            where:{
+                username: followerUser?.username
+            },
+            data:{
+                following:{
+                    connect : { id: followedUser.id}
+                },
+            },
+            include:{
+                followedBy: true,
+                following: true,
+            }
+        })
+
+        delete followedUser['password']
+        if (exchange){
+            res.json({ followedUser })
+        }
     } catch (error) {
       console.log(error)
     }
   })
 
-router.post('/:postid', async (req, res) => {
-    const { postid } = req.params
+
+  router.post('/unfollow/:username/:receptor', async (req, res) => {
+    const { username, receptor } = req.params
     try {
-      res.json({post, createdComment})
+        const followerUser = await prisma.user.findUnique({
+            where:{
+                username: username
+            }
+        })
+        const followedUser = await prisma.user.findUnique({
+            where: {
+              username: receptor
+            },
+        })
+
+
+        delete followedUser['password']
+        const exchange = await prisma.user.update({
+            where:{
+                username: followerUser?.username
+            },
+            data:{
+                following:{
+                    disconnect : { id: followedUser.id}
+                },
+            }
+        })
+
+        if (exchange){
+            res.json({ successful: "exchange" })
+        }
     } catch (error) {
       console.log(error)
     }
