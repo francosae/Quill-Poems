@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, PostCreationModal } from "./index";
 import { Link } from "react-router-dom";
 import API from "../services/apiClient";
+import { useNavigate } from "react-router-dom";
 const Navbar = ({ location }) => {
   if (location === "/login" || location === "/signup") {
     return <LoginNav />;
@@ -105,6 +106,8 @@ const AuthNav = () => {
 };
 
 function UserDropdown() {
+  const navigate = useNavigate()
+  
   return (
     <div class="dropdown dropdown-end">
       <label tabindex="0" class="btn btn-ghost btn-circle avatar">
@@ -126,7 +129,7 @@ function UserDropdown() {
           <a>Settings</a>
         </li>
         <li>
-          <a onClick={() => {API.logoutUser()}}>Logout</a>
+          <a onClick={() => {API.logoutUser(), navigate("/")}}>Logout</a>
         </li>
       </ul>
     </div>

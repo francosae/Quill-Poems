@@ -1,6 +1,6 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import apiClient from "../services/apiClient";
-
+import { useNavigate } from "react-router-dom";
 const AuthContext = createContext("");
 
 export const AuthContextProvider = ({ children }) => {
@@ -30,9 +30,10 @@ export const AuthContextProvider = ({ children }) => {
 	const handleLogout = async () => {
 		await apiClient.logoutUser();
 		setUser({});
+
 	};
 
-	const authValue = { user, setUser, initialized };
+	const authValue = { user, setUser, initialized, handleLogout};
 
 	return (
 		<AuthContext.Provider value={authValue}>
