@@ -26,8 +26,11 @@ const extractUserFromJwt = (req, res, next) => {
 
 const requireAuthenticatedUser = (req, res, next) => {
 	try {
-		console.log(res.locals)
-		console.log('from middleware')
+		const { user } = res.locals;
+
+		if (!user?.email) {
+			throw new UnauthorizedError("User authentication failed");
+		}
 		return next();
 	} catch (err) {
 		return next(err);

@@ -3,7 +3,7 @@ const express = require('express')
 const router = express.Router()
 import prisma from "../lib/prisma"
 
-router.post('/follow/:username/:receptor', async (req, res) => {
+router.post('/follow/:username/:receptor', security.requireAuthenticatedUser, async (req, res) => {
     const { username, receptor } = req.params
 
     try {
@@ -46,7 +46,7 @@ router.post('/follow/:username/:receptor', async (req, res) => {
   })
 
 
-  router.post('/unfollow/:username/:receptor', async (req, res) => {
+  router.post('/unfollow/:username/:receptor', security.requireAuthenticatedUser, async (req, res) => {
     const { username, receptor } = req.params
     try {
         const followerUser = await prisma.user.findUnique({

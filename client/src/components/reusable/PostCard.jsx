@@ -1,18 +1,23 @@
 import React, {useState} from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+
 export default function PostCard({ post }) {
     return (
-      <Link to={`/posts/${post.authorUsername}/${post.id}`}>
       <div key={post.id} className="card card-compact min-w-[250px] min-h-[250px] mb-3 rounded-lg border border-gray-200 hover:bg-gray-100 shadow-md bg-white p-3.5">
       <div className="card-title font-bold">{post.title}</div>
       <div class="card-body">
-        <p className="font-light text-left leading-relaxed">
+      <Link to={`/posts/${post.authorUsername}/${post.id}`}>
+        
+        <p className="font-light text-left leading-relaxed break-words">
           {post.content}
         </p>
+      </Link>
       </div>
               
-      <div class="flex items-center ">
+      <div class="flex items-center justify-between">          
+          <div className="card-actions">
           <div class="flex-shrink-0">
             <img
               class="w-7 h-7 rounded-full"
@@ -20,16 +25,19 @@ export default function PostCard({ post }) {
               alt="Neil image"
             />
           </div>
-          
-          <div className="card-actions justify-end">
           <Link to={`/user/${post.authorUsername}/`}>
           <div class="flex-1">
             <p class="text-sm font-semibold">{post.authorUsername}</p>
           </div>
           </Link>
           </div>
+
+          <div class='flex justify-between'>
+          <AiFillHeart/>
+          <AiOutlineHeart />
+          </div>
         </div>
       </div>
-      </Link>
+
     );
   }

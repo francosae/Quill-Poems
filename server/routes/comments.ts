@@ -25,7 +25,7 @@ router.get('/:postid', async (req, res) => {
     }
   })
 
-router.post('/:username/:postid', async (req, res) => {
+router.post('/:username/:postid', security.requireAuthenticatedUser, async (req, res) => {
     const { postid, username } = req.params
     const { content } = req.body
     try {
@@ -53,7 +53,7 @@ router.post('/:username/:postid', async (req, res) => {
     }
   })
 
-router.delete('/:username/:postid', async (req, res) => {
+router.delete('/:username/:postid', security.requireAuthenticatedUser, async (req, res) => {
     const { postid } = req.params
     const { commentid } = req.body
     try {

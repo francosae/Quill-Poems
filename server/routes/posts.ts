@@ -56,7 +56,7 @@ router.get('/:author/:id', async(req, res) => {
 })
 
 
-router.delete('/:author/:id',  security.requireAuthenticatedUser, async(req, res) => {
+router.delete('/:author/:id', security.requireAuthenticatedUser, async(req, res) => {
     const author = req.params.author
     const id = req.params.id
     try {
@@ -71,7 +71,7 @@ router.delete('/:author/:id',  security.requireAuthenticatedUser, async(req, res
     }
 })
 
-router.post('/:author', async (req,res) => {
+router.post('/:author', security.requireAuthenticatedUser, async (req,res) => {
     const author = req.params.author
     const { data } = req.body
     try {
@@ -96,7 +96,7 @@ router.post('/:author', async (req,res) => {
     }
 })
 
-router.post('/like/:username/:postid', async (req,res) => {
+router.post('/like/:username/:postid', security.requireAuthenticatedUser, async (req,res) => {
     const { postid, username } = req.params
     try{
         const user = await prisma.user.findUnique({
@@ -124,7 +124,7 @@ router.post('/like/:username/:postid', async (req,res) => {
     {console.log(error)}
 })
 
-router.post('/unlike/:username/:postid', async (req,res) => {
+router.post('/unlike/:username/:postid', security.requireAuthenticatedUser, async (req,res) => {
     const { postid, username } = req.params
     try{
         const user = await prisma.user.findUnique({
@@ -153,7 +153,7 @@ router.post('/unlike/:username/:postid', async (req,res) => {
 })
 
 
-router.post('/favorite/:username/:postid', async (req,res) => {
+router.post('/favorite/:username/:postid', security.requireAuthenticatedUser, async (req,res) => {
     const { postid, username } = req.params
     try{
         const user = await prisma.user.findUnique({
@@ -181,7 +181,7 @@ router.post('/favorite/:username/:postid', async (req,res) => {
     {console.log(error)}
 })
 
-router.post('/unfavorite/:username/:postid', async (req,res) => {
+router.post('/unfavorite/:username/:postid', security.requireAuthenticatedUser, async (req,res) => {
     const { postid, username } = req.params
     try{
         const user = await prisma.user.findUnique({
