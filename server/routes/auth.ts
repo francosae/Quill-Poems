@@ -55,7 +55,6 @@ router.post('/register', async (req, res, next) => {
         // Formatting fields 
         const formattedEmail = userData.email.toLowerCase()
         const formattedBirthday = new Date(userData.birthday.toString());
-        console.log(formattedBirthday)
         
         // Creating new user with fields.
         const newUser = await prisma.user.create({
@@ -111,10 +110,10 @@ router.post('/login', async (req, res, next) => {
             )
             // Storing locals, and returning user object with token.
             if (validPassword){
+                delete existingUser['password'];
                 const token = createUser(existingUser)
                 res.locals.token = token
                 res.locals.user = existingUser
-                delete existingUser['password'];
                 res.status(201).json({ existingUser, token})
 
             } else {
@@ -137,6 +136,7 @@ router.get('/me', security.requireAuthenticatedUser, async (req, res, next) => {
             }
         })
         delete existingUser['password'];
+        res.locals.user = existingUser
         res.status(200).json({ existingUser })
     } catch (err){
         next(err)

@@ -2,6 +2,7 @@
 const express = require('express')
 const router = express.Router()
 import prisma from "../lib/prisma"
+const security = require('../middleware/security')
 
 router.post('/follow/:username/:receptor', security.requireAuthenticatedUser, async (req, res) => {
     const { username, receptor } = req.params

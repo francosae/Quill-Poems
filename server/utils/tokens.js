@@ -7,10 +7,7 @@ function generateToken(data) {
 }
 
 function createUser(user) {
-    const payload = {
-        email: user.email,
-        isAdmin: user.isAdmin || false,
-    }
+    const payload = user
     return generateToken(payload)
 }
 
