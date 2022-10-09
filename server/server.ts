@@ -1,12 +1,11 @@
 // @ts-nocheck
-import prisma from "./lib/prisma"
 const express = require('express')
 const cors = require('cors')
 const { PORT } = require('./config')
 const app = express()
 const users = require('./routes/users')
 const posts = require('./routes/posts')
-const auth = require('./routes/auth'),
+const auth = require('./routes/auth')
 const social = require('./routes/social')
 const comments = require('./routes/comments')
 const security = require('./middleware/security')
