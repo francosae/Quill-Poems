@@ -4,6 +4,8 @@ Poetry Sharing Web App
 Tech Stack:
 PERN + Prisma
 
+View React Native Repo: https://github.com/Quill-Poems/quillpoems-reactnative/
+
 Wireframe:
 https://www.figma.com/file/wkVTyC26pByRcLvsQObBRs/Quill-Poems-Wireframes?node-id=0%3A1
 
